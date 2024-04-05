@@ -1,23 +1,19 @@
-package com.rod.api.board;
+package com.rod.api.article.model;
 
-import com.rod.api.article.Article;
 import lombok.*;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Component
 @Data
 @Builder
-public class BoardDto {
+public class ArticleDto {
     private Long id;
-    private String boardName;
-    private String boardType;
+    private String title;
+    private String content;
     private String registerDate;
-    private List<Article> articles;
-
+    private Long writerId;
+    private Long boardId;
 }

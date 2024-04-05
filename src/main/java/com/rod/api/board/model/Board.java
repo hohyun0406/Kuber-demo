@@ -1,7 +1,7 @@
-package com.rod.api.board;
+package com.rod.api.board.model;
 
-import com.rod.api.article.Article;
-import com.rod.api.common.query.BaseEntity;
+import com.rod.api.article.model.Article;
+import com.rod.api.common.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

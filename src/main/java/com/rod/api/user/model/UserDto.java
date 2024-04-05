@@ -1,9 +1,8 @@
-package com.rod.api.user;
+package com.rod.api.user.model;
 
-import com.rod.api.article.Article;
+import com.rod.api.article.model.Article;
 
 import lombok.*;
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

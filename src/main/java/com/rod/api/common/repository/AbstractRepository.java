@@ -1,4 +1,4 @@
-package com.rod.api.common;
+package com.rod.api.common.repository;
 
 import java.io.IOException;
 import java.util.Map;

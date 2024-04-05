@@ -1,4 +1,4 @@
-package com.rod.api.common.query;
+package com.rod.api.common.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

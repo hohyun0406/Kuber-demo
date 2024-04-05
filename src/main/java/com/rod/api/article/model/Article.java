@@ -1,11 +1,10 @@
-package com.rod.api.article;
+package com.rod.api.article.model;
 
-import com.rod.api.board.Board;
-import com.rod.api.common.query.BaseEntity;
-import com.rod.api.user.User;
+import com.rod.api.board.model.Board;
+import com.rod.api.common.model.BaseEntity;
+import com.rod.api.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.extern.log4j.Log4j;
 
 @Entity(name = "articles")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,11 +20,11 @@ public class Article extends BaseEntity {
     private String title;
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = true)
     private User writer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = true)
     private Board board;
 

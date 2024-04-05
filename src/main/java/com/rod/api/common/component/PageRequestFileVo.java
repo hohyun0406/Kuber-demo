@@ -1,7 +1,7 @@
 package com.rod.api.common.component;
 
 
-import com.rod.api.article.ArticleDto;
+import com.rod.api.article.model.ArticleDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

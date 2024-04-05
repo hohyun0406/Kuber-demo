@@ -1,4 +1,4 @@
-package com.rod.api.common;
+package com.rod.api.common.service;
 
 public class UtilServiceImpl implements UtilService {
 
