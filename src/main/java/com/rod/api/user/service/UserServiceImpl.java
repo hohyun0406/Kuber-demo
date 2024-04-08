@@ -1,12 +1,15 @@
 package com.rod.api.user.service;
 
 
+import com.rod.api.common.component.Messenger;
 import com.rod.api.common.component.PageRequestVo;
+import com.rod.api.user.model.User;
 import com.rod.api.user.model.UserDto;
 import com.rod.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,18 +19,47 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     @Override
-    public UserDto save(UserDto articleDto) {
-        return entityToDto(Optional.of(repository.save(dtoToEntity(articleDto))));
+    public Messenger save(UserDto userDto) {
+        entityToDto(Optional.of(repository.save(dtoToEntity(userDto))));
+        return new Messenger();
     }
 
+//    @Override
+//    public UserDto save(UserDto userDto) {
+//        return entityToDto(Optional.of(repository.save(dtoToEntity(userDto))));
+//    }
+
     @Override
-    public void deleteById(Long id) {
+    public Messenger deleteById(Long id) {
         repository.deleteById(id);
+        return new Messenger();
     }
 
     @Override
-    public List<UserDto> findAll(PageRequestVo vo) {
+    public Messenger modify(UserDto userDto) {
         return null;
+    }
+
+    @Override
+    public List<UserDto> findUsersByName(String name) {
+        return null;
+    }
+
+    @Override
+    public List<UserDto> findUsersByJob(String job) {
+        return null;
+    }
+
+    @Override
+    public Optional<User> findUsersByUsername(String username) {
+        return repository.findByUsername(username);
+    }
+
+
+    @Override
+    public List<UserDto> findAll() {
+        repository.findAll();
+        return new ArrayList<>();
     }
 
     @Override
@@ -44,5 +76,5 @@ public class UserServiceImpl implements UserService {
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
-    
+
 }

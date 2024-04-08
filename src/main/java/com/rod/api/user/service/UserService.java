@@ -1,6 +1,7 @@
 package com.rod.api.user.service;
 
 
+import com.rod.api.common.component.Messenger;
 import com.rod.api.common.service.CommandService;
 import com.rod.api.common.service.QueryService;
 import com.rod.api.user.model.User;
@@ -17,4 +18,9 @@ public interface UserService extends CommandService<UserDto>, QueryService<UserD
     default UserDto entityToDto(Optional<User> optional){
         return UserDto.builder().build();
     }
+
+    Messenger modify(UserDto user);
+    List<UserDto> findUsersByName(String name);
+    List<UserDto> findUsersByJob(String job);
+    Optional<User> findUsersByUsername(String username);
 }

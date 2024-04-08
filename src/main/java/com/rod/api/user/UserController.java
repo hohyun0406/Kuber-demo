@@ -1,6 +1,6 @@
 package com.rod.api.user;
 
-import com.rod.api.common.component.MessengerVo;
+import com.rod.api.common.component.Messenger;
 import com.rod.api.user.model.User;
 import com.rod.api.user.model.UserDto;
 import com.rod.api.user.repository.UserRepository;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,8 +34,8 @@ public class UserController {
 
     //커맨드
     @PostMapping("")
-    public ResponseEntity<MessengerVo> join(@RequestBody Map<?, ?> paramMap){
-        Map<String, MessengerVo> map = new HashMap<>();
+    public ResponseEntity<Messenger> join(@RequestBody Map<?, ?> paramMap){
+        Map<String, Messenger> map = new HashMap<>();
         User newUser = repo.save(User.builder()
                 .username((String) paramMap.get("username"))
                 .password((String) paramMap.get("password"))
@@ -46,22 +45,24 @@ public class UserController {
                 .build());
         log.info("DB 에 저장된 User 정보 : {}", newUser);
 
-        return ResponseEntity.ok(new MessengerVo());
+        return ResponseEntity.ok(new Messenger());
     }
 
 
 //쿼리
 
     @PostMapping("/login")
-    public ResponseEntity<MessengerVo> login(@RequestBody Map<?, ?> paramMap){
-        Map<String, MessengerVo> map = new HashMap<>();
-        String username = (String) paramMap.get("username");
-        log.info("리퀘스트가 가져온 이름 : {}", username);
-        String password = (String) paramMap.get("password");
-        log.info("리퀘스트가 가져온 비번 : {}", password);
+    public ResponseEntity<Messenger> login(@RequestBody Map<?, ?> paramMap){
+//        Map<String, MessengerVo> map = new HashMap<>();
+//        String username = (String) paramMap.get("username");
+//        log.info("리퀘스트가 가져온 이름 : {}", username);
+//        String password = (String) paramMap.get("password");
+//        log.info("리퀘스트가 가져온 비번 : {}", password);
 //        User dbUser = repo.findByUsername(username).orElse(null);
 
-        return ResponseEntity.ok(new MessengerVo());
+
+
+        return ResponseEntity.ok(new Messenger());
     }
 
 
@@ -75,5 +76,6 @@ public class UserController {
 //        map.put("result", list);
         return ResponseEntity.ok(new ArrayList<UserDto>());
     }
+
 
 }

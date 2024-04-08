@@ -3,11 +3,12 @@ package com.rod.api.article.service;
 import com.rod.api.article.model.Article;
 import com.rod.api.article.model.ArticleDto;
 import com.rod.api.article.repository.ArticleRepository;
-import com.rod.api.article.service.ArticleService;
+import com.rod.api.common.component.Messenger;
 import com.rod.api.common.component.PageRequestVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,18 +19,48 @@ public class ArticleServiceImpl implements ArticleService {
     private final ArticleRepository repository;
 
     @Override
-    public ArticleDto save(ArticleDto articleDto) {
-        return entityToDto(Optional.of(repository.save(dtoToEntity(articleDto))));
+    public Messenger save(ArticleDto articleDto) {
+        entityToDto(Optional.of(repository.save(dtoToEntity(articleDto))));
+        return new Messenger();
     }
 
     @Override
-    public void deleteById(Long id) {
+    public Messenger deleteById(Long id) {
         repository.deleteById(id);
+        return new Messenger();
     }
 
     @Override
-    public List<ArticleDto> findAll(PageRequestVo vo) {
-        return null;
+    public Messenger modify(ArticleDto articleDto) {
+        entityToDto(Optional.of(repository.save(dtoToEntity(articleDto))));
+        return new Messenger();
+    }
+
+    @Override
+    public List<ArticleDto> findArticlesByTitle(String title) {
+        return repository.findByTitle(title);
+    }
+
+    @Override
+    public List<ArticleDto> findArticlesByRegisterDate(String registerDate) {
+        return repository.findByRegisterDate(registerDate);
+    }
+
+    @Override
+    public Optional<Article> findArticlesByWriter(String writerId) {
+        return Optional.of(entityToDto(repository.findByWriterId(writerId)));
+    }
+
+    @Override
+    public Optional<Article> findArticlesByBoard(String boardId) {
+        return Optional.of(entityToDto(repository.findByBoardId(boardId)));
+    }
+
+
+    @Override
+    public List<ArticleDto> findAll() {
+        repository.findAll();
+        return new ArrayList<>();
     }
 
     @Override
