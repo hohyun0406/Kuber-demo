@@ -39,9 +39,8 @@ public class User extends BaseEntity {
     @Column(name = "job")
     private String job;
 
-    @OneToMany(mappedBy = "writer")
+    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
     private List<Article> articles;
-
 
     public void setPassword(String password) {
         this.password = password;

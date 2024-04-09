@@ -14,17 +14,25 @@ import java.util.Optional;
 
 public interface BoardService extends CommandService<BoardDto>, QueryService<BoardDto> {
     default Board dtoToEntity(BoardDto dto){
-        return Board.builder().build();
+        return Board.builder()
+                .id(dto.getId())
+                .boardName(dto.getBoardName())
+                .boardType(dto.getBoardType())
+                .build();
     }
 
-    default BoardDto entityToDto(Optional<Board> optional){
-        return BoardDto.builder().build();
+    default BoardDto entityToDto(Board board){
+        return BoardDto.builder()
+                .id(board.getId())
+                .boardName(board.getBoardName())
+                .boardType(board.getBoardType())
+                .build();
     }
 
-    Messenger modify(BoardDto boardDto);
-    List<BoardDto> findBoardsByBoardName(String boardName);
-    Optional<Board> findBoardsByBoardType(String boardType);
-    List<BoardDto> findBoardsByRegisterDate(String registerDate);
+//    Messenger modify(BoardDto boardDto);
+//    List<BoardDto> findBoardsByBoardName(String boardName);
+//    Optional<BoardDto> findBoardsByBoardType(String boardType);
+//    List<BoardDto> findBoardsByRegisterDate(String registerDate);
 
 
 }

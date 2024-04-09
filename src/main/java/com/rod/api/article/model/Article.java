@@ -11,21 +11,22 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 @ToString(exclude = {"id"})
 public class Article extends BaseEntity {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "article_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "writer_id", nullable = true)
     private User writer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "board_id", nullable = true)
     private Board board;
 
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Messenger save(ArticleDto articleDto) {
-        entityToDto(Optional.of(repository.save(dtoToEntity(articleDto))));
+        entityToDto(repository.save(dtoToEntity(articleDto)));
         return new Messenger();
     }
 
@@ -32,40 +33,40 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Messenger modify(ArticleDto articleDto) {
-        entityToDto(Optional.of(repository.save(dtoToEntity(articleDto))));
+        entityToDto(repository.save(dtoToEntity(articleDto)));
         return new Messenger();
     }
 
-    @Override
-    public List<ArticleDto> findArticlesByTitle(String title) {
-        return repository.findByTitle(title);
-    }
-
-    @Override
-    public List<ArticleDto> findArticlesByRegisterDate(String registerDate) {
-        return repository.findByRegisterDate(registerDate);
-    }
-
-    @Override
-    public Optional<Article> findArticlesByWriter(String writerId) {
-        return Optional.of(entityToDto(repository.findByWriterId(writerId)));
-    }
-
-    @Override
-    public Optional<Article> findArticlesByBoard(String boardId) {
-        return Optional.of(entityToDto(repository.findByBoardId(boardId)));
-    }
+//    @Override
+//    public List<ArticleDto> findArticlesByTitle(String title) {
+//        return repository.findByTitle(title);
+//    }
+//
+//    @Override
+//    public List<ArticleDto> findArticlesByRegisterDate(String registerDate) {
+//        return repository.findByRegisterDate(registerDate);
+//    }
+//
+//    @Override
+//    public Optional<ArticleDto> findArticlesByWriter(String writerId) {
+//        return Optional.of(entityToDto(repository.findByWriterId(writerId)));
+//    }
+//
+//    @Override
+//    public Optional<ArticleDto> findArticlesByBoard(String boardId) {
+//        return Optional.of(entityToDto(repository.findByBoardId(boardId)));
+//    }
 
 
     @Override
     public List<ArticleDto> findAll() {
-        repository.findAll();
-        return new ArrayList<>();
+        return repository.findAll().stream().map(this::entityToDto).collect(Collectors.toList());
     }
 
     @Override
     public Optional<ArticleDto> findById(Long id) {
-        return Optional.of(entityToDto(repository.findById(id)));
+//        return Optional.of(entityToDto(repository.findById(id)));
+        return null;
     }
 
     @Override

@@ -35,15 +35,15 @@ public class UserController {
     //커맨드
     @PostMapping("")
     public ResponseEntity<Messenger> join(@RequestBody Map<?, ?> paramMap){
-        Map<String, Messenger> map = new HashMap<>();
-        User newUser = repo.save(User.builder()
-                .username((String) paramMap.get("username"))
-                .password((String) paramMap.get("password"))
-                .name((String) paramMap.get("name"))
-                .phone((String) paramMap.get("phone"))
-                .job((String) paramMap.get("job"))
-                .build());
-        log.info("DB 에 저장된 User 정보 : {}", newUser);
+//        Map<String, Messenger> map = new HashMap<>();
+//        User newUser = repo.save(User.builder()
+//                .username((String) paramMap.get("username"))
+//                .password((String) paramMap.get("password"))
+//                .name((String) paramMap.get("name"))
+//                .phone((String) paramMap.get("phone"))
+//                .job((String) paramMap.get("job"))
+//                .build());
+//        log.info("DB 에 저장된 User 정보 : {}", newUser);
 
         return ResponseEntity.ok(new Messenger());
     }
@@ -66,15 +66,17 @@ public class UserController {
     }
 
 
-    @GetMapping("")
-    public ResponseEntity<List<UserDto>> findAll(Pageable pageable){
+//    @SuppressWarnings("unchecked")
+    @GetMapping("/list")
+    public ResponseEntity<List<UserDto>> findAll(){
 //        Map<String, Object> map = new HashMap<>();
 //        @SuppressWarnings("unchecked")
 //        List<User> list = service.findAll();
 //        list.forEach(System.out::println);
 //        System.out.println("리스트 사이즈 : "+list.size());
 //        map.put("result", list);
-        return ResponseEntity.ok(new ArrayList<UserDto>());
+//        log.info("입력받은 정보 : {}");
+        return ResponseEntity.ok(service.findAll());
     }
 
 

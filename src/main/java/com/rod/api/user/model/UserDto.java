@@ -21,4 +21,7 @@ public class UserDto {
     private String address;
     private String job;
     private List<Article> articlesId;
+    private String regDate;
+    private String modDate;
+
 }

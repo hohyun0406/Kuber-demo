@@ -10,6 +10,9 @@ import java.util.List;
 @Entity(name="boards")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
+@AllArgsConstructor
+@Builder
 @ToString(exclude = {"id"})
 public class Board extends BaseEntity {
     @Id
@@ -19,13 +22,7 @@ public class Board extends BaseEntity {
     private String boardName;
     private String boardType;
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
     private List<Article> articles;
 
-    @Builder(builderMethodName = "builder")
-    public Board(Long id, String boardName, String boardType) {
-        this.id = id;
-        this.boardName = boardName;
-        this.boardType = boardType;
-    }
 }
