@@ -28,9 +28,9 @@ public class UserController {
     private final UserServiceImpl service;
 
 
-    //커맨드
-    @PostMapping("")
-    public ResponseEntity<Messenger> join(@RequestBody Map<?, ?> paramMap){
+    //커맨드 : create, update, delete
+//    @PostMapping("")
+//    public ResponseEntity<Messenger> join(@RequestBody Map<?, ?> paramMap){
 //        Map<String, Messenger> map = new HashMap<>();
 //        User newUser = repo.save(User.builder()
 //                .username((String) paramMap.get("username"))
@@ -40,7 +40,19 @@ public class UserController {
 //                .job((String) paramMap.get("job"))
 //                .build());
 //        log.info("DB 에 저장된 User 정보 : {}", newUser);
-        return ResponseEntity.ok(new Messenger());
+//        return ResponseEntity.ok(new Messenger());
+//    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Messenger> save(@RequestBody UserDto userDto){
+        log.info("save request info : {} ", userDto);
+        return ResponseEntity.ok(service.save(userDto));
+    }
+
+    @PostMapping("/modify")
+    public ResponseEntity<Messenger> modify(@RequestBody UserDto userDto){
+        log.info("modify request info : {}", userDto);
+        return ResponseEntity.ok(service.save(userDto));
     }
 
     @GetMapping("/delete")
@@ -51,35 +63,26 @@ public class UserController {
 
 
 
-//쿼리
-    @PostMapping("/login")
-    public ResponseEntity<Messenger> login(@RequestBody Map<?, ?> paramMap){
-//        Map<String, MessengerVo> map = new HashMap<>();
-//        String username = (String) paramMap.get("username");
-//        log.info("리퀘스트가 가져온 이름 : {}", username);
-//        String password = (String) paramMap.get("password");
-//        log.info("리퀘스트가 가져온 비번 : {}", password);
-//        User dbUser = repo.findByUsername(username).orElse(null);
-        return ResponseEntity.ok(new Messenger());
-    }
+
+
+
+//쿼리 : read only (copy)
+
+//    @GetMapping("/login")
+//    public ResponseEntity<Messenger> login(@RequestBody UserDto userDto){
+//        return ResponseEntity.ok(service.login(userDto));
+//    }
 
 
 //    @SuppressWarnings("unchecked")
     @GetMapping("/list")
     public ResponseEntity<List<UserDto>> findAll(){
-//        Map<String, Object> map = new HashMap<>();
-//        @SuppressWarnings("unchecked")
-//        List<User> list = service.findAll();
-//        list.forEach(System.out::println);
-//        System.out.println("리스트 사이즈 : "+list.size());
-//        map.put("result", list);
-//        log.info("입력받은 정보 : {}");
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/detail")
     public ResponseEntity<Optional<UserDto>> findById(@RequestParam Long id){
-        log.info("입력받은 정보 : {}", id);
+        log.info("입력받은 아이디 : {}", id);
         return ResponseEntity.ok(service.findById(id));
     }
 

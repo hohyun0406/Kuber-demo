@@ -21,41 +21,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Messenger save(UserDto userDto) {
-        entityToDto(repository.save(dtoToEntity(userDto)));
-        return new Messenger();
+        repository.save(dtoToEntity(userDto));
+        return Messenger.builder().message(repository.findById(userDto.getId()).isPresent() ? "SUCCESS" : "FAILURE").build();
     }
-
-//    @Override
-//    public UserDto save(UserDto userDto) {
-//        return entityToDto(Optional.of(repository.save(dtoToEntity(userDto))));
-//    }
 
     @Override
     public Messenger deleteById(Long id) {
         repository.deleteById(id);
-        return Messenger.builder().message("Success").build();
+        return Messenger.builder().message(repository.findById(id).isPresent() ? "FAILURE" : "SUCCESS").build(); //값이 없어야 성공
     }
 
     @Override
     public Messenger modify(UserDto userDto) {
-        return null;
+        return Messenger.builder().message((repository.save(dtoToEntity(userDto)) instanceof User) ? "SUCCESS" : "FAILURE").build(); //아직 무조건 성공만
     }
-
-//    @Override
-//    public List<UserDto> findUsersByName(String name) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<UserDto> findUsersByJob(String job) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Optional<User> findUsersByUsername(String username) {
-//        return repository.findByUsername(username);
-//    }
-
 
     @Override
     public List<UserDto> findAll() {
@@ -77,4 +56,7 @@ public class UserServiceImpl implements UserService {
         return repository.existsById(id);
     }
 
+    public Messenger login(UserDto userDto) {
+        return null;
+    }
 }
