@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Messenger deleteById(Long id) {
         repository.deleteById(id);
-        return new Messenger();
+        return Messenger.builder().message("Success").build();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserDto> findById(Long id) {
-        return null;
+        return repository.findById(id).map(this::entityToDto);
     }
 
     @Override

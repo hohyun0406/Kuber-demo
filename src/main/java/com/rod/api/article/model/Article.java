@@ -29,5 +29,4 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "board_id", nullable = true)
     private Board board;
 
-
 }

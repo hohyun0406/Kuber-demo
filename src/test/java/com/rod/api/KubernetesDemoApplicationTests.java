@@ -1,4 +1,4 @@
-package org.example.kubernetesdemo;
+package com.rod.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

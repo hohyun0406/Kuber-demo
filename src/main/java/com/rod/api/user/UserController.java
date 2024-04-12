@@ -13,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ApiResponses(value = {
         @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
@@ -29,7 +26,6 @@ import java.util.Map;
 public class UserController {
 
     private final UserServiceImpl service;
-    private final UserRepository repo;
 
 
     //커맨드
@@ -44,13 +40,18 @@ public class UserController {
 //                .job((String) paramMap.get("job"))
 //                .build());
 //        log.info("DB 에 저장된 User 정보 : {}", newUser);
-
         return ResponseEntity.ok(new Messenger());
     }
 
+    @GetMapping("/delete")
+    public ResponseEntity<Messenger> deleteById(@RequestParam Long id){
+        log.info("입력받은 아이디 : {} ", id);
+        return ResponseEntity.ok(service.deleteById(id));
+    }
+
+
 
 //쿼리
-
     @PostMapping("/login")
     public ResponseEntity<Messenger> login(@RequestBody Map<?, ?> paramMap){
 //        Map<String, MessengerVo> map = new HashMap<>();
@@ -59,9 +60,6 @@ public class UserController {
 //        String password = (String) paramMap.get("password");
 //        log.info("리퀘스트가 가져온 비번 : {}", password);
 //        User dbUser = repo.findByUsername(username).orElse(null);
-
-
-
         return ResponseEntity.ok(new Messenger());
     }
 
@@ -77,6 +75,12 @@ public class UserController {
 //        map.put("result", list);
 //        log.info("입력받은 정보 : {}");
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<Optional<UserDto>> findById(@RequestParam Long id){
+        log.info("입력받은 정보 : {}", id);
+        return ResponseEntity.ok(service.findById(id));
     }
 
 

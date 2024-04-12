@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate:
 
@@ -23,6 +23,7 @@ spring:
         '[format_sql]': true
     show-sql: true
     defer-datasource-initialization: true # after ddl-auto, data.sql query apply
+    open-in-view: false
 logging:
   level:
     org:
