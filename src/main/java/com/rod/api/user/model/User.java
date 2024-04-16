@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Builder
 @AllArgsConstructor
-@ToString(exclude = {"id"})
+@ToString(exclude = {"id", "articles"})
 public class User extends BaseEntity {
     @Id
     @Column(name="user_id", nullable = false)

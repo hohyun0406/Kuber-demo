@@ -35,8 +35,10 @@ public interface UserService extends CommandService<UserDto>, QueryService<UserD
     }
 
 
+
+
 //    Messenger modify(UserDto user);
 //    List<UserDto> findUsersByName(String name);
 //    List<UserDto> findUsersByJob(String job);
-//    Optional<User> findUsersByUsername(String username);
+Optional<User> findUserByUsername(String username);
 }

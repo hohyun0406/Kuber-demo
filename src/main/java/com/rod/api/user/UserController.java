@@ -60,8 +60,9 @@ public class UserController {
         log.info("입력받은 아이디 : {} ", id);
         return ResponseEntity.ok(service.deleteById(id));
     }
-
-
+//
+//    /delete/2
+//    /delete?id=2
 
 
 
@@ -84,6 +85,12 @@ public class UserController {
     public ResponseEntity<Optional<UserDto>> findById(@RequestParam Long id){
         log.info("입력받은 아이디 : {}", id);
         return ResponseEntity.ok(service.findById(id));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Messenger> login(@RequestBody UserDto userDto) {
+        log.info("login request : {}", userDto);
+        return ResponseEntity.ok(service.login(userDto));
     }
 
 
